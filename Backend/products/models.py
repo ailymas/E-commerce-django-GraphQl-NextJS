@@ -6,10 +6,15 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name=models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
+    
 
 class SubCategory(models.Model):
     name=models.CharField(max_length=50)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name="SubCategories")
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name=models.CharField(max_length=50)
@@ -18,6 +23,8 @@ class Product(models.Model):
     description=models.TextField()
     price=models.PositiveIntegerField()
     amount_in_Stock=models.PositiveIntegerField()
+    def __str__(self):
+        return self.name
 
 class ProductImage(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name="images")
